@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.company.demo.web.mainwindow.ExtAppMainWindow"
+        extends="/com/haulmont/cuba/web/app/mainwindow/mainwindow.xml"
+        messagesPack="com.company.demo.web.mainwindow"
+        xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
+    <dsContext>
+        <collectionDatasource id="sparePartsSearchDs"
+                              class="com.company.demo.entity.SparePart"
+                              view="_local">
+            <query>
+                <![CDATA[select e from demo$SparePart e where cast(e.code varchar(10)) = :custom$searchString]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout>
+        <split id="foldersSplit">
+            <main:workArea id="workArea">
+                <main:initialLayout expand="vSpacer">
+                    <hbox spacing="true">
+                        <textField id="searchTextField"
+                                   caption="Search by code"/>
+                        <textField id="resultTextField"
+                                   editable="false"
+                                   caption="Result SparePart"/>
+                    </hbox>
+
+                    <searchPickerField id="searchPickerField"
+                                       caption="Search by code and set to field"
+                                       optionsDatasource="sparePartsSearchDs"/>
+                    <label id="vSpacer"/>
+                </main:initialLayout>
+            </main:workArea>
+        </split>
+    </layout>
+</window>
